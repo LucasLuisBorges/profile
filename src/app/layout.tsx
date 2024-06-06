@@ -28,11 +28,11 @@ export default function RootLayout({
       suppressHydrationWarning={true}
     >
       <body className="text-gray-100 max-w-2xl m-auto">
-        <main className="p-6 pt-3 md:pt-6 min-h-screen">
+        <main className="px-6 pt-3 md:pt-6 min-h-screen">
           <Header />
           {children}
+          <Footer />
         </main>
-        <Footer />
       </body>
     </html>
   );
