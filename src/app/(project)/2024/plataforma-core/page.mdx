@@ -1,0 +1,92 @@
+import Image from "next/image";
+
+export const metadata = {
+  title: "Plataforma Core",
+  description: "Uma plataforma com painéis públicos e privados",
+  openGraph: {
+    title: "Plataforma Core",
+    description: "Uma plataforma com painéis públicos e privados",
+  },
+};
+
+Uma plataforma que reúne diversos painéis com informações relevantes e permite que os usuários visualizem e compartilhem essas informações.
+
+Essa plataforma conta com alguns dados puxados diretamente de um [Google Sheets](https://docs.google.com/spreadsheets/u/0/?hl=pt) e todos os painéis vem de uma API interna da empresa.
+
+## Desenvolvido utilizando:
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [React Query](https://react-query.tanstack.com/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+
+## Processo de desenvolvimento
+
+Todo o processo de desenvolvimento foi feito em 4 semanas, contando com autenticação, painéis, visualização e compartilhamento de dados.
+
+## Entrega do projeto
+
+Por final, a plataforma foi subida na [Vercel](https://vercel.com/) e entregue para o [core](https://coresc.org.br/).
+
+## Plataforma
+
+<a href="https://dev-plataforma-core.vercel.app/" target="_blank">
+  ![Página principal da plataforma](/images/plataforma-core/hero.png)
+</a>
+
+Utilizamos uma biblioteca para criar a nuvem de palavrão com sua animação e responsividade.
+
+<a href="https://dev-plataforma-core.vercel.app/" target="_blank">
+  ![Página principal da plataforma](/images/plataforma-core/numbers.png)
+</a>
+
+Na parte dos painéis, utilizamos uma lógica que verifica se tem painéis alem dos mostrados em tela. Caso sim, a página da a opção de avançar para ver mais painéis.
+
+<a href="https://dev-plataforma-core.vercel.app/" target="_blank">
+  ![Página principal da plataforma](/images/plataforma-core/panels.png)
+</a>
+
+A visualização de painéis foi totalmente estilizada para priorizar a imersão do usuário.
+
+<a
+  href="https://dev-plataforma-core.vercel.app/painel/clp9sfdmq003rp7kdgq258o6z"
+  target="_blank"
+>
+  ![Página principal da plataforma](/images/plataforma-core/panel.png)
+</a>
+
+## Desenvolvedores
+
+<div className="flex itens-center gap-2">
+  <div className="flex flex-col itens-center text-center">
+    <a href="https://github.com/LucasLuisBorges" target="_blank">
+      <Image
+        src="https://github.com/LucasLuisBorges.png"
+        alt="Lucas Borges"
+        className="rounded-full bg-gray-100 block  grayscale hover:grayscale-0"
+        unoptimized
+        width={160}
+        height={160}
+        priority
+      />
+    </a>
+    [Lucas Borges](https://github.com/LucasLuisBorges)
+  </div>
+
+    <div className="flex flex-col itens-center text-center">
+    <a href="https://github.com/lucas2xl" target="_blank">
+      <Image
+        src="https://github.com/lucas2xl.png"
+        alt="Lucas Borges"
+        className="rounded-full bg-gray-100 block  grayscale hover:grayscale-0"
+        unoptimized
+        width={160}
+        height={160}
+        priority
+      />
+    </a>
+    [Lucas Aguiar](https://github.com/lucas2xl)
+
+  </div>
+</div>
