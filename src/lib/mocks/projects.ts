@@ -1,5 +1,10 @@
 export const projectsData = [
   {
+    id: "vitrine-sebrae",
+    date: "August 1, 2024",
+    title: "Vitrine Sebrae",
+  },
+  {
     id: "observarotio-sindipi",
     date: "May 17, 2024",
     title: "Observatório Sindipi",
