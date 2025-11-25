@@ -1,5 +1,20 @@
 export const projectsData = [
   {
+    id: "assessment-pmf",
+    date: "Nov 5, 2025",
+    title: "Assessment PMF",
+  },
+  {
+    id: "novo-observatorio-sebrae",
+    date: "Feb 14, 2025",
+    title: "Novo Observatório Sebrae",
+  },
+  {
+    id: "novo-vitrine-sebrae",
+    date: "Jan 10, 2025",
+    title: "Novo Vitrine Sebrae",
+  },
+  {
     id: "vitrine-sebrae",
     date: "August 1, 2024",
     title: "Vitrine Sebrae",

@@ -8,9 +8,9 @@ export function Footer() {
         <Link
           className="border-b transition-[border-color] text-white border-gray-500 hover:border-white"
           target="_blank"
-          href="https://www.instagram.com/llborgesss/"
+          href="https://www.linkedin.com/in/lucasluisborges/"
         >
-          @llborgesss
+          lucasluisborges
         </Link>
         )
       </div>
