@@ -12,7 +12,7 @@ export const projectsData = [
   {
     id: "novo-vitrine-sebrae",
     date: "Jan 10, 2025",
-    title: "Novo Vitrine Sebrae",
+    title: "Novo Vitrine Sebrae MPE",
   },
   {
     id: "vitrine-sebrae",
