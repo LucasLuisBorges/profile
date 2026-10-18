@@ -1,9 +1,0 @@
-import { withHeadingId } from "./utils";
-
-export function H1({ children }: { children: React.ReactNode }) {
-  return (
-    <h1 className="text-2xl font-bold mb-1 text-gray-100">
-      {withHeadingId(children)}
-    </h1>
-  );
-}
