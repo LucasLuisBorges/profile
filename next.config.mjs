@@ -1,9 +1,10 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static HTML in out/ — served by nginx on the VPS (see Dockerfile).
-  output: "export",
-  trailingSlash: true,
+  // Self-contained Node server for the Docker image (see Dockerfile).
+  output: "standalone",
   images: { unoptimized: true },
 };
 
-export default nextConfig;
+export default createNextIntlPlugin()(nextConfig);

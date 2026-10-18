@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { accents, tr, ui, type Locale } from "@/content/i18n";
+import { useTranslations } from "next-intl";
+import { accents, tr, type Locale } from "@/content/site";
+import { Link } from "@/i18n/navigation";
 import type { Project } from "@/content/projects";
 import { Flow } from "./flow";
 import { trackPointer } from "./motion";
@@ -23,7 +24,7 @@ export function Shot({ src, alt, className = "" }: { src: string; alt: string; c
 }
 
 export function FeaturedProject({ p, lang, index }: Props & { index: number }) {
-  const t = ui[lang].work;
+  const t = useTranslations("work");
   const title = tr(p.title, lang);
   const color = accents[p.accent];
 
@@ -42,7 +43,7 @@ export function FeaturedProject({ p, lang, index }: Props & { index: number }) {
             {tr(p.client, lang)} · {p.year}
           </p>
           <h3 className="mt-3 font-display text-5xl font-extrabold tracking-tight sm:text-6xl">
-            <Link href={`/${lang}/projects/${p.slug}/`} className="after:absolute after:inset-0">
+            <Link href={`/projects/${p.slug}`} className="after:absolute after:inset-0">
               {title}
             </Link>
           </h3>
@@ -50,9 +51,9 @@ export function FeaturedProject({ p, lang, index }: Props & { index: number }) {
 
           {p.metrics && (
             <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-white/10 pt-6">
-              {p.metrics.map((m) => (
-                <div key={m.value}>
-                  <dt className="font-display text-2xl font-extrabold text-[var(--accent)] sm:text-3xl">{m.value}</dt>
+              {p.metrics.map((m, i) => (
+                <div key={i}>
+                  <dt className="font-display text-2xl font-extrabold text-[var(--accent)] sm:text-3xl">{tr(m.value, lang)}</dt>
                   <dd className="mt-1 text-xs leading-snug text-fog">{m.label[lang]}</dd>
                 </div>
               ))}
@@ -68,7 +69,7 @@ export function FeaturedProject({ p, lang, index }: Props & { index: number }) {
           </ul>
 
           <span className="mt-8 inline-flex items-center gap-2 font-semibold text-[var(--accent)]">
-            {t.view}
+            {t("view")}
             <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
           </span>
         </div>
@@ -103,10 +104,11 @@ export function FeaturedProject({ p, lang, index }: Props & { index: number }) {
 }
 
 export function ProjectCard({ p, lang }: Props) {
+  const t = useTranslations("work");
   const color = accents[p.accent];
   return (
     <Link
-      href={`/${lang}/projects/${p.slug}/`}
+      href={`/projects/${p.slug}`}
       onMouseMove={trackPointer}
       style={accentVar(p)}
       className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-ink-2 transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--accent)]"
@@ -144,7 +146,7 @@ export function ProjectCard({ p, lang }: Props) {
         <h3 className="mt-2 font-display text-2xl font-bold tracking-tight">{tr(p.title, lang)}</h3>
         <p className="mt-2 text-sm leading-relaxed text-fog">{p.tagline[lang]}</p>
         <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-[var(--accent)]">
-          {ui[lang].work.view}
+          {t("view")}
           <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-45">→</span>
         </span>
       </div>

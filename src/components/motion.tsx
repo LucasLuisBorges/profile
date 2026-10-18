@@ -23,7 +23,7 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
   );
 }
 
-export function Counter({ value }: { value: number }) {
+export function Counter({ value, format = String }: { value: number; format?: (n: number) => string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
@@ -33,12 +33,12 @@ export function Counter({ value }: { value: number }) {
     const controls = animate(0, value, {
       duration: 1.8,
       ease,
-      onUpdate: (v) => ref.current && (ref.current.textContent = Math.round(v).toString()),
+      onUpdate: (v) => ref.current && (ref.current.textContent = format(Math.round(v))),
     });
     return () => controls.stop();
-  }, [inView, reduce, value]);
+  }, [inView, reduce, value, format]);
 
-  return <span ref={ref}>{value}</span>;
+  return <span ref={ref}>{format(value)}</span>;
 }
 
 /** Feeds the `.spotlight` glow with the pointer position. */

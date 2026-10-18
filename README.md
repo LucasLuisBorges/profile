@@ -1,8 +1,8 @@
 # Lucas Borges — Portfolio
 
-Personal portfolio in Portuguese and English: projects, impact numbers and career journey.
+Personal portfolio in Portuguese and English: projects, impact numbers and career journey. Live at https://lunger.com.br.
 
-**Stack:** Next.js 16 (static export) · React 19 · Tailwind CSS 4 · Motion
+**Stack:** Next.js 16 · React 19 · next-intl · Tailwind CSS 4 · Motion
 
 ## Run locally
 
@@ -11,24 +11,24 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 — `/` redirects to `/pt/` or `/en/` based on the browser language.
+Open http://localhost:3000.
 
-## Editing content
+## Languages
 
-All copy lives in two typed files, each string in `pt` and `en`:
+[next-intl](https://next-intl.dev) with `localePrefix: "never"`: URLs carry no locale. `src/proxy.ts` picks it from the `NEXT_LOCALE` cookie (set by the PT/EN switch), falling back to the browser's `Accept-Language`, and rewrites to the statically rendered `/[locale]` page.
 
-- `src/content/i18n.ts` — UI text, stats, impact numbers, principles, skills, journey
-- `src/content/projects.ts` — projects (featured ones get the big cards; projects without `images` show their `flow`)
+- UI copy: `messages/pt.json` and `messages/en.json` (typed via `src/global.d.ts`)
+- Content: `src/content/site.ts` (stats, impact, journey, skills) and `src/content/projects.ts`, each string with `pt` and `en`
 
-Screenshots go in `public/images/` as WebP (~1600px wide).
+`node src/content/site.check.ts` checks the journey duration math.
 
 ## Deploy (VPS)
 
-`npm run build` writes plain static files to `out/`. The Dockerfile builds them and serves them with nginx:
+The Dockerfile builds a standalone Next.js server on port 3000:
 
 ```bash
 docker build -t lucas-portfolio .
-docker run -d --name portfolio --restart unless-stopped -p 8080:80 lucas-portfolio
+docker run -d --name portfolio --restart unless-stopped -p 127.0.0.1:8090:3000 lucas-portfolio
 ```
 
-Put your reverse proxy (Caddy, Traefik, nginx, Coolify…) in front of port 8080 for the domain and HTTPS. Without Docker, copy `out/` to any static web server using the rules in `nginx.conf`.
+On the VPS the repo lives in `/root/www/portfolio` and nginx (`/etc/nginx/sites-available/lunger.com.br`) proxies `lunger.com.br` to `127.0.0.1:8090`. Paths the portfolio answers 404 for are redirected to `hades.lunger.com.br`.

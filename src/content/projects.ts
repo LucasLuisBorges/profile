@@ -1,4 +1,4 @@
-import type { Accent, L } from "./i18n";
+import type { Accent, L } from "./site";
 
 type List = { pt: string[]; en: string[] };
 
@@ -10,16 +10,18 @@ export type Project = {
   role: string | L;
   accent: Accent;
   featured?: boolean;
+  /** Older client work: listed compactly under "Archive". */
+  archived?: boolean;
   tagline: L;
   summary: L;
   highlights: List;
-  metrics?: { value: string; label: L }[];
+  metrics?: { value: string | L; label: L }[];
   stack: string[];
   /** Screenshots under /public. Projects without them render `flow` instead. */
   images?: string[];
   flow?: List;
   url?: string;
-  team?: { name: string; github: string }[];
+  team?: { name: string; github?: string }[];
 };
 
 const aguiar = { name: "Lucas Aguiar", github: "https://github.com/laguiarx" };
@@ -69,6 +71,151 @@ export const projects: Project[] = [
       pt: ["Logs de produção", "Incidentes", "Triagem por LLM", "LangGraph.js", "Agente em Docker", "Draft PR"],
       en: ["Production logs", "Incidents", "LLM triage", "LangGraph.js", "Agent in Docker", "Draft PR"],
     },
+    url: "https://aura-v2.cadmus.com.br/",
+  },
+  {
+    slug: "elencar",
+    title: "Elencar",
+    client: { pt: "Produto próprio", en: "Own product" },
+    year: "2026",
+    role: { pt: "Co-criador · Full Stack & IA", en: "Co-creator · Full Stack & AI" },
+    accent: "cyan",
+    featured: true,
+    tagline: {
+      pt: "SaaS para organizadores de feiras: inscrições, curadoria com IA, Pix e um servidor MCP para Claude e ChatGPT.",
+      en: "SaaS for fair organizers: applications, AI curation, Pix payments and an MCP server for Claude and ChatGPT.",
+    },
+    summary: {
+      pt: "O Elencar tira a seleção de expositores da planilha. O organizador recebe inscrições (ou importa do Google Forms e de CSV), avalia com a equipe, publica o resultado, acompanha confirmações e cobra por Pix com split de marketplace. Um agente de curadoria sugere aprovar, pôr em espera ou recusar cada inscrição, e um servidor MCP próprio deixa o organizador operar tudo de dentro do Claude ou do ChatGPT.",
+      en: "Elencar takes vendor selection out of spreadsheets. Organizers receive applications (or import them from Google Forms and CSV), review them with their team, publish results, track confirmations and charge vendors by Pix with a marketplace split. A curation agent suggests approving, waitlisting or rejecting each application, and a custom MCP server lets organizers run everything from inside Claude or ChatGPT.",
+    },
+    highlights: {
+      pt: [
+        "Servidor MCP com OAuth próprio (registro dinâmico de clientes, RFC 9728): 47 ferramentas, 9 delas com cards interativos dentro do chat (MCP Apps).",
+        "Ações que enviam algo exigem confirmação: o assistente repete a chamada com um código de uso único válido por 5 minutos.",
+        "Agente de curadoria na OpenAI Responses API com saída em JSON Schema estrito, dados pessoais removidos antes do envio e defesas contra prompt injection.",
+        "Regras duras antes da IA: validação de CNPJ/MEI e compatibilidade de CNAE com dados da Receita Federal.",
+        "Pix com split de marketplace via Mercado Pago, conectado por organização e validado com pagamento real.",
+        "WhatsApp Cloud API, notificações em tempo real (SSE), fila de jobs durável, trilha de auditoria e interface em português, espanhol e inglês.",
+        "Gates de qualidade: checker de arquitetura, testes de mutação e 1.146 testes unitários + 53 de integração com PostgreSQL.",
+      ],
+      en: [
+        "MCP server with its own OAuth (dynamic client registration, RFC 9728): 47 tools, 9 of them rendering interactive cards inside the chat (MCP Apps).",
+        "Anything that sends requires confirmation: the assistant repeats the call with a single-use code valid for 5 minutes.",
+        "Curation agent on the OpenAI Responses API with strict JSON Schema output, personal data stripped before sending and prompt-injection defences.",
+        "Hard rules run before the AI: CNPJ/MEI checks and CNAE compatibility using Brazilian federal revenue data.",
+        "Pix with a marketplace split via Mercado Pago, connected per organization and proven with a real payment.",
+        "WhatsApp Cloud API, realtime notifications (SSE), a durable job queue, an audit trail and a UI in Portuguese, Spanish and English.",
+        "Quality gates: an architecture checker, mutation testing and 1,146 unit tests + 53 PostgreSQL integration tests.",
+      ],
+    },
+    metrics: [
+      { value: "47", label: { pt: "ferramentas MCP para Claude e ChatGPT", en: "MCP tools for Claude and ChatGPT" } },
+      { value: { pt: "1.146", en: "1,146" }, label: { pt: "testes unitários", en: "unit tests" } },
+      { value: "Pix", label: { pt: "com split de marketplace", en: "with marketplace split" } },
+    ],
+    stack: ["Bun", "Hono", "tRPC", "React", "TanStack", "Prisma", "PostgreSQL", "Better Auth", "OpenAI", "MCP", "Mercado Pago", "Docker"],
+    images: ["/images/elencar/home.webp"],
+    flow: {
+      pt: ["Inscrição", "Regras (CNPJ/CNAE)", "Curadoria com IA", "Decisão da equipe", "Resultado + Pix"],
+      en: ["Application", "Rules (CNPJ/CNAE)", "AI curation", "Team decision", "Result + Pix"],
+    },
+    url: "https://elencar.com.br/",
+    team: [aguiar],
+  },
+  {
+    slug: "patie",
+    title: "Patiê",
+    client: { pt: "Produto próprio", en: "Own product" },
+    year: "2025 → 2026",
+    role: { pt: "Criador · Full Stack & IA", en: "Creator · Full Stack & AI" },
+    accent: "orange",
+    featured: true,
+    tagline: {
+      pt: "Marketplace de pet shops com vitrine, agendamento, painel da loja, admin e app — pagamento dividido e IA no catálogo.",
+      en: "A pet-shop marketplace with storefront, bookings, store dashboard, admin and app — split payments and AI in the catalog.",
+    },
+    summary: {
+      pt: "O “iFood dos pets”: o tutor compra produtos e agenda banho e serviços, cada pet shop tem seu painel e o time da plataforma opera um console admin. São cinco frentes — API, vitrine, painel da loja, admin e app mobile — e escrevi cerca de 1.560 dos ~1.700 commits.",
+      en: "An “iFood for pets”: owners buy products and book grooming and services, every pet shop gets its own dashboard and the platform team runs an admin console. Five fronts — API, storefront, store dashboard, admin and mobile app — and I wrote about 1,560 of the ~1,700 commits.",
+    },
+    highlights: {
+      pt: [
+        "Split de pagamentos no Mercado Pago: contas de vendedor conectadas por OAuth, tokens cifrados, webhooks assinados, assinaturas e livro-razão financeiro — validado com dinheiro real.",
+        "IA no catálogo: sugestão de taxonomia na importação de produtos e validação de sugestões com OpenAI.",
+        "Nota fiscal brasileira: NF-e e NFS-e com assinatura de XML e integração com o Tiny ERP.",
+        "Observabilidade completa: OpenTelemetry, Prometheus, Grafana, Loki, Tempo, Alertmanager e Metabase.",
+        "API em Bun + Hono com OpenAPI, 80 modelos Prisma, 103 migrations e tempo real com Socket.IO.",
+        "Auditoria pré-lançamento com 51 agentes de IA e um revisor cético checando cada achado crítico.",
+      ],
+      en: [
+        "Mercado Pago split payments: seller accounts connected via OAuth, encrypted tokens, signed webhooks, subscriptions and a financial ledger — proven with real money.",
+        "AI in the catalog: taxonomy suggestions on product import and OpenAI-validated catalog suggestions.",
+        "Brazilian invoicing: NF-e and NFS-e with XML signing and a Tiny ERP integration.",
+        "Full observability: OpenTelemetry, Prometheus, Grafana, Loki, Tempo, Alertmanager and Metabase.",
+        "Bun + Hono API with OpenAPI, 80 Prisma models, 103 migrations and realtime via Socket.IO.",
+        "Pre-launch audit by 51 AI agents, with a skeptic reviewer checking every critical finding.",
+      ],
+    },
+    metrics: [
+      { value: "5", label: { pt: "apps: API, vitrine, painel, admin e mobile", en: "apps: API, storefront, dashboard, admin, mobile" } },
+      { value: "80", label: { pt: "modelos de dados", en: "data models" } },
+      { value: "51", label: { pt: "agentes de IA na auditoria", en: "AI agents in the audit" } },
+    ],
+    stack: ["Bun", "Hono", "Prisma", "PostgreSQL", "Redis", "Socket.IO", "React 19", "Next.js 16", "Expo", "Better Auth", "OpenAI", "Mercado Pago", "OpenTelemetry", "Terraform"],
+    images: ["/images/patie/home.webp"],
+    flow: {
+      pt: ["Tutor", "Vitrine", "Pagamento com split", "Pet shop", "Nota fiscal"],
+      en: ["Pet owner", "Storefront", "Split payment", "Pet shop", "Invoice"],
+    },
+    url: "https://patie.com.br/",
+    team: [{ name: "Nicollas Mirapalheta" }, { name: "Bryan Fardin" }],
+  },
+  {
+    slug: "hades",
+    title: "Hades",
+    client: { pt: "Produto próprio", en: "Own product" },
+    year: "2026",
+    role: { pt: "Co-criador · Full Stack & IA", en: "Co-creator · Full Stack & AI" },
+    accent: "violet",
+    featured: true,
+    tagline: {
+      pt: "Gestão para prestadores de serviço — leads, orçamentos, obras, horas, finanças e marketing — com um agente de IA que consulta o workspace.",
+      en: "Operations for service businesses — leads, estimates, jobs, timesheets, finance and marketing — with an AI agent that queries the workspace.",
+    },
+    summary: {
+      pt: "Workspace multi-tenant para empresas de encanamento, reforma, pintura e paisagismo: leads, orçamentos com templates, projetos, apontamento de horas, biblioteca de materiais, finanças e automações de marketing. O Ask AI é um agente com tool calling que responde perguntas sobre o próprio workspace usando os mesmos serviços — e as mesmas permissões — de quem pergunta.",
+      en: "A multi-tenant workspace for plumbing, remodeling, painting and landscaping businesses: leads, templated estimates, projects, timesheets, a materials library, finance and marketing automations. Ask AI is a tool-calling agent that answers questions about the workspace through the same services — and the same permissions — as the person asking.",
+    },
+    highlights: {
+      pt: [
+        "Ask AI: até 6 rodadas de ferramentas, contabilização de tokens, cota por workspace e dados redigidos antes de chegar ao modelo.",
+        "Cada ferramenta do agente chama um serviço existente com os IDs de quem pergunta, então as regras de acesso valem também para a IA.",
+        "Workspaces multi-tenant com papéis, convites, 2FA e audit log.",
+        "Automações de marketing por e-mail e SMS (Twilio) com descadastro.",
+        "CI com Playwright em desktop e mobile contra um PostgreSQL descartável em Docker, e gate de complexidade no código.",
+      ],
+      en: [
+        "Ask AI: up to 6 tool rounds, token accounting, per-workspace quota and data redacted before it reaches the model.",
+        "Every agent tool calls an existing service with the asker's own IDs, so access rules apply to the AI too.",
+        "Multi-tenant workspaces with roles, invites, 2FA and audit logging.",
+        "Email and SMS (Twilio) marketing automations with unsubscribe handling.",
+        "CI with Playwright on desktop and mobile against a throwaway PostgreSQL in Docker, plus a code complexity gate.",
+      ],
+    },
+    metrics: [
+      { value: "6", label: { pt: "rodadas de ferramentas por pergunta", en: "tool rounds per question" } },
+      { value: "2FA", label: { pt: "+ papéis e audit log", en: "+ roles and audit log" } },
+      { value: "E2E", label: { pt: "Playwright em desktop e mobile", en: "Playwright on desktop and mobile" } },
+    ],
+    stack: ["Bun", "Hono", "oRPC", "React", "TanStack Router", "Drizzle", "PostgreSQL", "Better Auth", "Turborepo", "Twilio", "Playwright"],
+    images: ["/images/hades/home.webp"],
+    flow: {
+      pt: ["Pergunta", "Ask AI", "Ferramentas = serviços", "Permissões do usuário", "Resposta"],
+      en: ["Question", "Ask AI", "Tools = services", "User permissions", "Answer"],
+    },
+    url: "https://hades.lunger.com.br/",
+    team: [aguiar],
   },
   {
     slug: "ai-hub",
@@ -76,8 +223,7 @@ export const projects: Project[] = [
     client: "Cadmus",
     year: "2026",
     role: "Senior AI Engineer",
-    accent: "violet",
-    featured: true,
+    accent: "pink",
     tagline: {
       pt: "Workspace corporativo multi-tenant para agentes de IA e RAG.",
       en: "Multi-tenant corporate workspace for AI agents and RAG.",
@@ -108,6 +254,7 @@ export const projects: Project[] = [
       pt: ["Tenant", "RBAC de 6 papéis", "Construtor visual", "Agentes + RAG", "Uso & licenças"],
       en: ["Tenant", "6-role RBAC", "Visual builder", "Agents + RAG", "Usage & licenses"],
     },
+    url: "https://aihub.cadmus.com.br/",
   },
   {
     slug: "observatorio-sebrae",
@@ -116,7 +263,6 @@ export const projects: Project[] = [
     year: "2023 → 2025",
     role: "Full Stack Developer",
     accent: "cyan",
-    featured: true,
     tagline: {
       pt: "Inteligência de mercado sobre 20 mil+ startups brasileiras, em três idiomas.",
       en: "Market intelligence on 20K+ Brazilian startups, in three languages.",
@@ -164,7 +310,7 @@ export const projects: Project[] = [
     year: "2024",
     role: "Full Stack Developer",
     accent: "orange",
-    featured: true,
+    archived: true,
     tagline: {
       pt: "Todo o BI corporativo da Agência Espacial Brasileira em uma plataforma.",
       en: "The Brazilian Space Agency's entire corporate BI in one platform.",
@@ -240,7 +386,7 @@ export const projects: Project[] = [
     client: "TDBUSINESS",
     year: "2022 → 2025",
     role: "Full Stack Developer",
-    accent: "pink",
+    accent: "lime",
     tagline: {
       pt: "De 4 horas para 3 minutos: um ambiente SaaS novo com um clique.",
       en: "From 4 hours to 3 minutes: a new SaaS environment in one click.",
@@ -277,7 +423,67 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "fiscalok",
+    title: "fiscalOK",
+    client: { pt: "Produto próprio", en: "Own product" },
+    year: "2026",
+    role: "Full Stack Developer",
+    accent: "yellow",
+    tagline: {
+      pt: "SaaS para negócios de alimentação passarem na fiscalização sanitária.",
+      en: "A SaaS that helps food businesses pass health inspections.",
+    },
+    summary: {
+      pt: "Checklists sanitários com modelos, cronogramas, cadastro de equipamentos, formulários de temperatura, evidências com assinatura e relatórios, com cobrança recorrente via Stripe liberando o workspace.",
+      en: "Sanitary checklists with templates, schedules, equipment records, temperature forms, signed evidence and reports, with Stripe subscriptions unlocking the workspace.",
+    },
+    highlights: {
+      pt: [
+        "Domínio de checklists sanitários modelado do zero a partir de uma especificação técnica.",
+        "Assinaturas Stripe com bloqueio do workspace por status de pagamento.",
+        "Monorepo Turborepo com Next.js, Hono e oRPC, e logging centralizado.",
+      ],
+      en: [
+        "Sanitary checklist domain modeled from scratch from a technical spec.",
+        "Stripe subscriptions gating the workspace by payment status.",
+        "Turborepo monorepo with Next.js, Hono and oRPC, plus centralized logging.",
+      ],
+    },
+    stack: ["Next.js", "Hono", "oRPC", "Drizzle", "PostgreSQL", "Better Auth", "Stripe", "Turborepo"],
+    flow: {
+      pt: ["Modelo de checklist", "Cronograma", "Execução + evidências", "Assinatura", "Relatório"],
+      en: ["Checklist template", "Schedule", "Run + evidence", "Signature", "Report"],
+    },
+  },
+  {
+    slug: "aeterna-rpg",
+    title: "Aeterna RPG",
+    client: { pt: "Projeto pessoal", en: "Personal project" },
+    year: "2026",
+    role: "Game dev",
+    accent: "pink",
+    tagline: {
+      pt: "RPG de ação em pixel art no Unity 6, com regras inspiradas em D&D 5e.",
+      en: "A pixel-art action RPG in Unity 6 with rules inspired by D&D 5e.",
+    },
+    summary: {
+      pt: "Protótipo de RPG de ação em pixel art (Unity 6, URP 2D) com combate baseado no SRD 5.2 de D&D 5e, multiclasse, árvores de talentos, crafting, estações do ano e ciclo dia/noite — tudo montado por código ao dar Play.",
+      en: "A pixel-art action RPG prototype (Unity 6, URP 2D) with combat based on the D&D 5e SRD 5.2, multiclassing, talent trees, crafting, seasons and a day/night cycle — all built from code when you hit Play.",
+    },
+    highlights: {
+      pt: ["Regras de combate a partir do SRD 5.2 de D&D 5e.", "Multiclasse, árvores de talentos e crafting.", "Estações do ano e ciclo dia/noite."],
+      en: ["Combat rules derived from the D&D 5e SRD 5.2.", "Multiclassing, talent trees and crafting.", "Seasons and a day/night cycle."],
+    },
+    stack: ["Unity 6", "C#", "URP 2D", "Git LFS"],
+    flow: {
+      pt: ["Atributos (SRD 5.2)", "Classes + multiclasse", "Talentos", "Crafting", "Estações e dia/noite"],
+      en: ["Abilities (SRD 5.2)", "Classes + multiclass", "Talents", "Crafting", "Seasons & day/night"],
+    },
+    team: [{ name: "Bryan Fardin" }],
+  },
+  {
     slug: "vitrine-sebrae",
+    archived: true,
     title: "Vitrine Sebrae Startups",
     client: "Sebrae",
     year: "2024 → 2025",
@@ -315,6 +521,7 @@ export const projects: Project[] = [
   },
   {
     slug: "plataforma-core",
+    archived: true,
     title: "Plataforma CORE",
     client: "CORE-SC",
     year: "2024",
@@ -354,6 +561,7 @@ export const projects: Project[] = [
   },
   {
     slug: "sindipi",
+    archived: true,
     title: "Plataforma Sindipi",
     client: "Sindipi",
     year: "2023 → 2024",
@@ -394,6 +602,7 @@ export const projects: Project[] = [
   },
   {
     slug: "planejamento-sebrae",
+    archived: true,
     title: "Planejamento Sebrae SC",
     client: "Sebrae SC",
     year: "2023",
@@ -434,6 +643,7 @@ export const projects: Project[] = [
   },
   {
     slug: "observatorio-cti",
+    archived: true,
     title: "Observatório CTI",
     client: "Fapesc",
     year: "2023",
@@ -457,6 +667,7 @@ export const projects: Project[] = [
   },
   {
     slug: "td-business",
+    archived: true,
     title: "TD Business",
     client: "TDBUSINESS",
     year: "2023",
@@ -486,6 +697,7 @@ export const projects: Project[] = [
   },
   {
     slug: "saas-admin-client",
+    archived: true,
     title: "SaaS Admin / Client",
     client: "Navint",
     year: "2023",
@@ -517,6 +729,7 @@ export const projects: Project[] = [
   },
   {
     slug: "assessment-pmf",
+    archived: true,
     title: "Assessment PMF",
     client: { pt: "Prefeitura de Florianópolis", en: "Florianópolis City Hall" },
     year: "2025",
@@ -540,6 +753,7 @@ export const projects: Project[] = [
   },
   {
     slug: "2xl",
+    archived: true,
     title: "2XL",
     client: "Freelance",
     year: "2023",

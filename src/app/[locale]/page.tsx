@@ -1,9 +1,14 @@
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/hero";
 import { Counter, Reveal } from "@/components/motion";
 import { CopyEmail, Impact, Journey, SectionTitle } from "@/components/sections";
 import { FeaturedProject, ProjectCard } from "@/components/work";
-import { accents, links, principles, skills, ui, type Locale } from "@/content/i18n";
+import { accents, links, principles, skills, stats, tr, type Locale } from "@/content/site";
 import { projects } from "@/content/projects";
+import { Link } from "@/i18n/navigation";
+
+// Re-render daily so "today" in the journey durations stays current.
+export const revalidate = 86400;
 
 const band = ["AI Agents", "RAG", "LangGraph.js", "TypeScript", "React 19", "Next.js", "Node.js", "Bun", "PostgreSQL", "pgvector", "Docker", "Terraform", "AWS", "Multi-tenant", "RBAC"];
 
@@ -21,15 +26,17 @@ function Marquee({ items, className, reverse }: { items: string[]; className: st
   );
 }
 
-export default async function Home({ params }: { params: Promise<{ lang: Locale }> }) {
-  const { lang } = await params;
-  const t = ui[lang];
+export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale: lang } = await params;
+  setRequestLocale(lang);
+  const t = await getTranslations();
   const featured = projects.filter((p) => p.featured);
-  const others = projects.filter((p) => !p.featured);
+  const more = projects.filter((p) => !p.featured && !p.archived);
+  const archive = projects.filter((p) => p.archived);
 
   return (
     <main className="overflow-x-clip">
-      <Hero lang={lang} />
+      <Hero />
 
       <div className="relative z-10 -my-4 py-10">
         <Marquee items={band} className="-rotate-2 bg-lime text-ink" />
@@ -38,20 +45,20 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
 
       <section className="mx-auto max-w-6xl px-4 py-20">
         <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 lg:grid-cols-4">
-          {t.stats.map((s, i) => (
-            <div key={s.label} className="bg-ink p-6 sm:p-8">
+          {stats.map((s, i) => (
+            <div key={s.label.en} className="bg-ink p-6 sm:p-8">
               <dt className="font-display text-5xl font-extrabold tracking-tight sm:text-6xl" style={{ color: Object.values(accents)[i] }}>
                 <Counter value={s.value} />
                 {s.suffix}
               </dt>
-              <dd className="mt-2 text-sm text-fog">{s.label}</dd>
+              <dd className="mt-2 text-sm text-fog">{s.label[lang]}</dd>
             </div>
           ))}
         </dl>
       </section>
 
       <section id="work" className="mx-auto max-w-6xl px-4 py-20">
-        <SectionTitle kicker={t.work.kicker} title={t.work.title} />
+        <SectionTitle kicker={t("work.kicker")} title={t("work.title")} />
         <div className="space-y-8">
           {featured.map((p, i) => (
             <Reveal key={p.slug}>
@@ -60,23 +67,45 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
           ))}
         </div>
 
-        <h3 className="mt-24 mb-8 font-display text-3xl font-bold tracking-tight">{t.work.more}</h3>
+        <h3 className="mt-24 mb-8 font-display text-3xl font-bold tracking-tight">{t("work.more")}</h3>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {others.map((p, i) => (
+          {more.map((p, i) => (
             <Reveal key={p.slug} delay={(i % 3) * 0.08} className="h-full">
               <ProjectCard p={p} lang={lang} />
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-20">
+          <div className="flex flex-wrap items-end justify-between gap-2">
+            <h3 className="font-display text-3xl font-bold tracking-tight">{t("work.archive")}</h3>
+            <p className="font-mono text-xs text-fog">{t("work.archiveNote")}</p>
+          </div>
+          <ul className="mt-6 border-t border-white/10">
+            {archive.map((p) => (
+              <li key={p.slug} style={{ ["--accent" as string]: accents[p.accent] }}>
+                <Link
+                  href={`/projects/${p.slug}`}
+                  className="group grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 border-b border-white/10 py-4 transition-colors hover:bg-white/[0.03] sm:grid-cols-[16rem_1fr_6rem_auto]"
+                >
+                  <span className="col-start-1 row-start-1 font-display text-lg font-bold transition-colors group-hover:text-[var(--accent)]">{tr(p.title, lang)}</span>
+                  <span className="col-span-2 row-start-2 text-sm text-fog sm:col-span-1 sm:col-start-2 sm:row-start-1">{p.tagline[lang]}</span>
+                  <span className="hidden font-mono text-xs text-fog sm:col-start-3 sm:row-start-1 sm:block">{p.year}</span>
+                  <span className="col-start-2 row-start-1 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)] sm:col-start-4">→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </section>
 
       <section id="impact" className="mx-auto max-w-6xl px-4 py-20">
-        <SectionTitle kicker={t.impact.kicker} title={t.impact.title} />
-        <Impact lang={lang} />
+        <SectionTitle kicker={t("impact.kicker")} title={t("impact.title")} />
+        <Impact />
       </section>
 
       <section id="about" className="mx-auto max-w-6xl px-4 py-20">
-        <SectionTitle kicker={t.about.kicker} title={t.about.title} />
+        <SectionTitle kicker={t("about.kicker")} title={t("about.title")} />
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div className="relative mx-auto w-fit lg:mx-0">
@@ -90,7 +119,7 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
               />
             </div>
             <div className="mt-8 space-y-5 text-lg leading-relaxed text-fog">
-              {t.about.bio.map((p) => (
+              {(t.raw("about.bio") as string[]).map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
@@ -113,7 +142,7 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
         </div>
 
         <Reveal className="mt-20">
-          <h3 className="mb-6 font-display text-3xl font-bold tracking-tight">{t.about.skills}</h3>
+          <h3 className="mb-6 font-display text-3xl font-bold tracking-tight">{t("about.skills")}</h3>
           <div className="space-y-5">
             {skills.map((g) => (
               <div key={g.title.en} className="grid gap-3 border-t border-white/10 pt-5 md:grid-cols-[14rem_1fr]" style={{ ["--accent" as string]: accents[g.accent] }}>
@@ -135,8 +164,8 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
       </section>
 
       <section id="journey" className="mx-auto max-w-6xl px-4 py-20">
-        <SectionTitle kicker={t.journey.kicker} title={t.journey.title} />
-        <Journey lang={lang} />
+        <SectionTitle kicker={t("journey.kicker")} title={t("journey.title")} />
+        <Journey />
       </section>
 
       <section id="contact" className="mx-auto max-w-6xl px-4 py-20">
@@ -145,11 +174,11 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
             <div aria-hidden className="animate-drift-b absolute -top-24 -right-24 size-96 rounded-full bg-cyan/60 blur-[90px]" />
             <div aria-hidden className="animate-drift-a absolute -bottom-32 -left-20 size-80 rounded-full bg-yellow/70 blur-[90px]" />
             <div className="relative">
-              <p className="font-mono text-sm tracking-widest uppercase">{t.contact.kicker}</p>
+              <p className="font-mono text-sm tracking-widest uppercase">{t("contact.kicker")}</p>
               <h2 className="mt-4 max-w-4xl font-display text-5xl leading-[0.92] font-extrabold tracking-tight text-balance sm:text-8xl">
-                {t.contact.title}
+                {t("contact.title")}
               </h2>
-              <p className="mt-6 max-w-xl text-lg font-medium">{t.contact.body}</p>
+              <p className="mt-6 max-w-xl text-lg font-medium">{t("contact.body")}</p>
               <a
                 href={`mailto:${links.email}`}
                 className="mt-10 block w-fit max-w-full font-display text-2xl font-bold break-all underline decoration-4 underline-offset-8 transition-colors hover:text-pink sm:text-4xl"
@@ -157,7 +186,7 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
                 {links.email}
               </a>
               <div className="mt-10 flex flex-wrap gap-3">
-                <CopyEmail lang={lang} />
+                <CopyEmail />
                 <a href={links.linkedin} target="_blank" className="rounded-full bg-ink px-6 py-3.5 font-semibold text-lime transition-transform hover:-translate-y-0.5">
                   LinkedIn ↗
                 </a>
@@ -165,7 +194,7 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
                   GitHub ↗
                 </a>
                 <a href={links.cv[lang]} target="_blank" className="rounded-full border-2 border-ink px-6 py-3.5 font-semibold transition-colors hover:bg-ink hover:text-lime">
-                  {t.hero.cv} ↓
+                  {t("hero.cv")} ↓
                 </a>
               </div>
             </div>
