@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Lucas Borges — Senior AI Engineer",
+    "title": "Lucas Borges · Senior AI Engineer",
     "description": "Senior AI Engineer com 5+ anos em Full Stack TypeScript. Agentes de IA, RAG e plataformas SaaS multi-tenant em produção."
   },
   "nav": {
@@ -21,43 +21,43 @@
       "SaaS multi-tenant que escala",
       "produto TypeScript de ponta a ponta"
     ],
-    "bio": "5+ anos em Full Stack TypeScript. Liderei a reescrita do Aura, plataforma em que agentes de IA investigam incidentes reais e abrem o Pull Request da correção — com guardrails, auditoria e 991 testes verdes.",
+    "bio": "5+ anos em Full Stack TypeScript. Liderei a reescrita do Aura, plataforma em que agentes de IA investigam incidentes reais e abrem o Pull Request da correção, com guardrails, auditoria e 991 testes verdes.",
     "work": "Ver projetos",
     "cv": "Baixar CV",
     "location": "Brasil · UTC−3",
     "scroll": "role para baixo"
   },
   "work": {
-    "kicker": "01 — Projetos",
+    "kicker": "01 · Projetos",
     "title": "Coisas que eu coloquei em produção",
     "more": "Mais projetos",
     "archive": "Arquivo",
-    "archiveNote": "Sites e plataformas para clientes, 2023–2024.",
+    "archiveNote": "Sites e plataformas para clientes, de 2023 e 2024.",
     "view": "Ver case"
   },
   "impact": {
-    "kicker": "02 — Impacto",
+    "kicker": "02 · Impacto",
     "title": "Números que eu movi",
     "before": "antes",
     "after": "depois",
     "more": "E mais alguns"
   },
   "about": {
-    "kicker": "03 — Sobre",
+    "kicker": "03 · Sobre",
     "title": "Senior, na prática",
     "bio": [
-      "Comecei em 2021 fazendo apps React Native na Khomp, ainda na faculdade. Entre a TDBUSINESS e projetos freelance, passei quatro anos colocando no ar plataformas para Sebrae, Agência Espacial Brasileira, Sindipi e Fapesc — CRMs multi-tenant, dashboards analíticos, chatbots e automação de infraestrutura.",
-      "Hoje, como Senior AI Engineer na Cadmus, trabalho onde produto, IA e segurança se encontram: agentes que mexem em código de verdade, RAG multi-tenant e a governança que deixa tudo isso rodar em produção sem susto. Fora do trabalho, construo e opero meus próprios produtos — Elencar, Patiê e Hades — numa VPS que eu mesmo administro."
+      "Comecei em 2021 fazendo apps React Native na Khomp, ainda na faculdade. Entre a TDBUSINESS e projetos freelance, passei quatro anos colocando no ar plataformas para Sebrae, Agência Espacial Brasileira, Sindipi e Fapesc: CRMs multi-tenant, dashboards analíticos, chatbots e automação de infraestrutura.",
+      "Hoje, como Senior AI Engineer na Cadmus, trabalho onde produto, IA e segurança se encontram: agentes que mexem em código de verdade, RAG multi-tenant e a governança que deixa tudo isso rodar em produção sem susto. Fora do trabalho, construo e opero meus próprios produtos, como Elencar, Patiê e Hades, numa VPS que eu mesmo administro."
     ],
     "skills": "Onde eu sou forte"
   },
   "journey": {
-    "kicker": "04 — Trajetória",
+    "kicker": "04 · Trajetória",
     "title": "De React Native a agentes de IA",
     "now": "atual"
   },
   "contact": {
-    "kicker": "05 — Contato",
+    "kicker": "05 · Contato",
     "title": "Tem um problema difícil? Bora conversar.",
     "body": "Agentes de IA, plataformas SaaS, reescritas grandes ou aquele sistema que ninguém quer encostar. Me chama.",
     "copy": "Copiar e-mail",

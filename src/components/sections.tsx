@@ -51,7 +51,7 @@ export function Impact() {
                 <div className="mt-7 space-y-3 font-mono text-sm">
                   {[
                     { label: t("before"), value: m.before, text: m.beforeText, bg: "rgb(255 255 255 / 0.12)", fg: "#f4f4f8" },
-                    { label: t("after"), value: m.after, text: m.afterText, bg: color, fg: "#07070c" },
+                    { label: t("after"), value: m.after, text: tr(m.afterText, lang), bg: color, fg: "#07070c" },
                   ].map((b, j) => (
                     <div key={b.label} className="flex items-center gap-3">
                       <span className="w-14 shrink-0 text-xs text-fog">{b.label}</span>
