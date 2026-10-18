@@ -159,7 +159,7 @@ export default async function ProjectPage({ params }: Props) {
             {p.images.map((src, i) => (
               <Reveal key={src} delay={(i % 2) * 0.1} className={i === 0 ? "md:col-span-2" : ""}>
                 <a href={p.url ?? src} target="_blank" className="block transition-transform duration-500 hover:-translate-y-1">
-                  <Shot src={src} alt={`${title} — ${i + 1}`} />
+                  <Shot src={src} alt={`${title} · ${i + 1}`} />
                 </a>
               </Reveal>
             ))}

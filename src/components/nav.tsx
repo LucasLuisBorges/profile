@@ -1,14 +1,42 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "motion/react";
+import { animate, motion, useScroll, useSpring } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
 const sections = ["work", "impact", "about", "journey"] as const;
 
+// Chrome turns off every native smooth scroll (CSS and scrollTo) when the OS
+// "reduce motion"/"animation effects" setting is on, so same-page anchor
+// clicks animate the scroll themselves. Decorative motion still respects it.
+function useSmoothAnchors() {
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element).closest?.<HTMLAnchorElement>("a[href*='#']");
+      if (!a) return;
+      const url = new URL(a.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+      const el = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      if (!el) return;
+      e.preventDefault(); // capture phase: runs before Next's <Link>, which then skips its own jump
+      const top = el.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(el).scrollMarginTop || "0");
+      animate(window.scrollY, top, {
+        duration: 0.9,
+        ease: [0.65, 0, 0.35, 1],
+        onUpdate: (y) => window.scrollTo({ top: y, behavior: "instant" }),
+      });
+      history.pushState(null, "", url.hash);
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
+}
+
 export function Nav() {
+  useSmoothAnchors();
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();

@@ -42,7 +42,7 @@ export function Terminal() {
           <span className="size-3 rounded-full bg-pink" />
           <span className="size-3 rounded-full bg-yellow" />
           <span className="size-3 rounded-full bg-lime" />
-          <span className="ml-3 font-mono text-xs text-fog">aura — agent</span>
+          <span className="ml-3 font-mono text-xs text-fog">aura · agent</span>
         </div>
         <pre
           aria-label="Illustrative AI agent run"

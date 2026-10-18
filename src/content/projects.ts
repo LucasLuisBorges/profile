@@ -132,16 +132,16 @@ export const projects: Project[] = [
     accent: "orange",
     featured: true,
     tagline: {
-      pt: "Marketplace de pet shops com vitrine, agendamento, painel da loja, admin e app — pagamento dividido e IA no catálogo.",
-      en: "A pet-shop marketplace with storefront, bookings, store dashboard, admin and app — split payments and AI in the catalog.",
+      pt: "Marketplace de pet shops com vitrine, agendamento, painel da loja, admin e app, com pagamento dividido e IA no catálogo.",
+      en: "A pet-shop marketplace with storefront, bookings, store dashboard, admin and app, with split payments and AI in the catalog.",
     },
     summary: {
-      pt: "O “iFood dos pets”: o tutor compra produtos e agenda banho e serviços, cada pet shop tem seu painel e o time da plataforma opera um console admin. São cinco frentes — API, vitrine, painel da loja, admin e app mobile — e escrevi cerca de 1.560 dos ~1.700 commits.",
-      en: "An “iFood for pets”: owners buy products and book grooming and services, every pet shop gets its own dashboard and the platform team runs an admin console. Five fronts — API, storefront, store dashboard, admin and mobile app — and I wrote about 1,560 of the ~1,700 commits.",
+      pt: "O “iFood dos pets”: o tutor compra produtos e agenda banho e serviços, cada pet shop tem seu painel e o time da plataforma opera um console admin. São cinco frentes (API, vitrine, painel da loja, admin e app mobile), e escrevi cerca de 1.560 dos ~1.700 commits.",
+      en: "An “iFood for pets”: owners buy products and book grooming and services, every pet shop gets its own dashboard and the platform team runs an admin console. Five fronts (API, storefront, store dashboard, admin and mobile app), and I wrote about 1,560 of the ~1,700 commits.",
     },
     highlights: {
       pt: [
-        "Split de pagamentos no Mercado Pago: contas de vendedor conectadas por OAuth, tokens cifrados, webhooks assinados, assinaturas e livro-razão financeiro — validado com dinheiro real.",
+        "Split de pagamentos no Mercado Pago: contas de vendedor conectadas por OAuth, tokens cifrados, webhooks assinados, assinaturas e livro-razão financeiro, validado com dinheiro real.",
         "IA no catálogo: sugestão de taxonomia na importação de produtos e validação de sugestões com OpenAI.",
         "Nota fiscal brasileira: NF-e e NFS-e com assinatura de XML e integração com o Tiny ERP.",
         "Observabilidade completa: OpenTelemetry, Prometheus, Grafana, Loki, Tempo, Alertmanager e Metabase.",
@@ -149,7 +149,7 @@ export const projects: Project[] = [
         "Auditoria pré-lançamento com 51 agentes de IA e um revisor cético checando cada achado crítico.",
       ],
       en: [
-        "Mercado Pago split payments: seller accounts connected via OAuth, encrypted tokens, signed webhooks, subscriptions and a financial ledger — proven with real money.",
+        "Mercado Pago split payments: seller accounts connected via OAuth, encrypted tokens, signed webhooks, subscriptions and a financial ledger, proven with real money.",
         "AI in the catalog: taxonomy suggestions on product import and OpenAI-validated catalog suggestions.",
         "Brazilian invoicing: NF-e and NFS-e with XML signing and a Tiny ERP integration.",
         "Full observability: OpenTelemetry, Prometheus, Grafana, Loki, Tempo, Alertmanager and Metabase.",
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     metrics: [
       { value: "5", label: { pt: "apps: API, vitrine, painel, admin e mobile", en: "apps: API, storefront, dashboard, admin, mobile" } },
       { value: "80", label: { pt: "modelos de dados", en: "data models" } },
-      { value: "51", label: { pt: "agentes de IA na auditoria", en: "AI agents in the audit" } },
+      { value: "NF-e", label: { pt: "e NFS-e integradas ao Tiny ERP", en: "and NFS-e invoicing via Tiny ERP" } },
     ],
     stack: ["Bun", "Hono", "Prisma", "PostgreSQL", "Redis", "Socket.IO", "React 19", "Next.js 16", "Expo", "Better Auth", "OpenAI", "Mercado Pago", "OpenTelemetry", "Terraform"],
     images: ["/images/patie/home.webp"],
@@ -180,12 +180,12 @@ export const projects: Project[] = [
     accent: "violet",
     featured: true,
     tagline: {
-      pt: "Gestão para prestadores de serviço — leads, orçamentos, obras, horas, finanças e marketing — com um agente de IA que consulta o workspace.",
-      en: "Operations for service businesses — leads, estimates, jobs, timesheets, finance and marketing — with an AI agent that queries the workspace.",
+      pt: "Gestão para prestadores de serviço (leads, orçamentos, obras, horas, finanças e marketing) com um agente de IA que consulta o workspace.",
+      en: "Operations for service businesses (leads, estimates, jobs, timesheets, finance and marketing) with an AI agent that queries the workspace.",
     },
     summary: {
-      pt: "Workspace multi-tenant para empresas de encanamento, reforma, pintura e paisagismo: leads, orçamentos com templates, projetos, apontamento de horas, biblioteca de materiais, finanças e automações de marketing. O Ask AI é um agente com tool calling que responde perguntas sobre o próprio workspace usando os mesmos serviços — e as mesmas permissões — de quem pergunta.",
-      en: "A multi-tenant workspace for plumbing, remodeling, painting and landscaping businesses: leads, templated estimates, projects, timesheets, a materials library, finance and marketing automations. Ask AI is a tool-calling agent that answers questions about the workspace through the same services — and the same permissions — as the person asking.",
+      pt: "Workspace multi-tenant para empresas de encanamento, reforma, pintura e paisagismo: leads, orçamentos com templates, projetos, apontamento de horas, biblioteca de materiais, finanças e automações de marketing. O Ask AI é um agente com tool calling que responde perguntas sobre o próprio workspace usando os mesmos serviços e as mesmas permissões de quem pergunta.",
+      en: "A multi-tenant workspace for plumbing, remodeling, painting and landscaping businesses: leads, templated estimates, projects, timesheets, a materials library, finance and marketing automations. Ask AI is a tool-calling agent that answers questions about the workspace through the same services and permissions as the person asking.",
     },
     highlights: {
       pt: [
@@ -357,8 +357,8 @@ export const projects: Project[] = [
       en: "End-to-end credit approval with QiTech, Wellhub and facial verification.",
     },
     summary: {
-      pt: "Fluxo completo de crédito — cadastro, análise, parceiros, sessões e controle de status — integrado diretamente a QiTech e Wellhub. Inclui validação de identidade com reconhecimento facial e leitura de documentos, e serviços Backend for Frontend em Rust orquestrando as APIs.",
-      en: "A complete credit flow — signup, credit analysis, partners, sessions and status control — integrated directly with QiTech and Wellhub. It includes identity verification with facial recognition and document reading, plus Rust Backend-for-Frontend services orchestrating the APIs.",
+      pt: "Fluxo completo de crédito, com cadastro, análise, parceiros, sessões e controle de status, integrado diretamente a QiTech e Wellhub. Inclui validação de identidade com reconhecimento facial e leitura de documentos, e serviços Backend for Frontend em Rust orquestrando as APIs.",
+      en: "A complete credit flow covering signup, credit analysis, partners, sessions and status control, integrated directly with QiTech and Wellhub. It includes identity verification with facial recognition and document reading, plus Rust Backend-for-Frontend services orchestrating the APIs.",
     },
     highlights: {
       pt: [
@@ -392,8 +392,8 @@ export const projects: Project[] = [
       en: "From 4 hours to 3 minutes: a new SaaS environment in one click.",
     },
     summary: {
-      pt: "Na TDBUSINESS, construí a base das plataformas SaaS da empresa: CRM multi-tenant para 200+ usuários, com isolamento de dados por tenant, 5 níveis de permissão, soft delete e audit log. Depois automatizei o provisionamento de cada cliente novo — repositório no GitHub, banco Neon PostgreSQL e deploy na Vercel, tudo orquestrado por Server Actions do Next.js.",
-      en: "At TDBUSINESS I built the foundation of the company's SaaS platforms: a multi-tenant CRM for 200+ users with per-tenant data isolation, 5 permission levels, soft deletes and audit logging. Then I automated provisioning for every new client — GitHub repository, Neon PostgreSQL database and Vercel deploy, all orchestrated by Next.js Server Actions.",
+      pt: "Na TDBUSINESS, construí a base das plataformas SaaS da empresa: CRM multi-tenant para 200+ usuários, com isolamento de dados por tenant, 5 níveis de permissão, soft delete e audit log. Depois automatizei o provisionamento de cada cliente novo: repositório no GitHub, banco Neon PostgreSQL e deploy na Vercel, tudo orquestrado por Server Actions do Next.js.",
+      en: "At TDBUSINESS I built the foundation of the company's SaaS platforms: a multi-tenant CRM for 200+ users with per-tenant data isolation, 5 permission levels, soft deletes and audit logging. Then I automated provisioning for every new client: GitHub repository, Neon PostgreSQL database and Vercel deploy, all orchestrated by Next.js Server Actions.",
     },
     highlights: {
       pt: [
@@ -467,8 +467,8 @@ export const projects: Project[] = [
       en: "A pixel-art action RPG in Unity 6 with rules inspired by D&D 5e.",
     },
     summary: {
-      pt: "Protótipo de RPG de ação em pixel art (Unity 6, URP 2D) com combate baseado no SRD 5.2 de D&D 5e, multiclasse, árvores de talentos, crafting, estações do ano e ciclo dia/noite — tudo montado por código ao dar Play.",
-      en: "A pixel-art action RPG prototype (Unity 6, URP 2D) with combat based on the D&D 5e SRD 5.2, multiclassing, talent trees, crafting, seasons and a day/night cycle — all built from code when you hit Play.",
+      pt: "Protótipo de RPG de ação em pixel art (Unity 6, URP 2D) com combate baseado no SRD 5.2 de D&D 5e, multiclasse, árvores de talentos, crafting, estações do ano e ciclo dia/noite, tudo montado por código ao dar Play.",
+      en: "A pixel-art action RPG prototype (Unity 6, URP 2D) with combat based on the D&D 5e SRD 5.2, multiclassing, talent trees, crafting, seasons and a day/night cycle, all built from code when you hit Play.",
     },
     highlights: {
       pt: ["Regras de combate a partir do SRD 5.2 de D&D 5e.", "Multiclasse, árvores de talentos e crafting.", "Estações do ano e ciclo dia/noite."],
@@ -494,19 +494,19 @@ export const projects: Project[] = [
       en: "A live showcase of startups and small businesses for Sebrae events.",
     },
     summary: {
-      pt: "Catálogo interativo de startups curadas pelo Sebrae, feito para ser explorado em telões e celulares durante eventos. Fui o único dev front-end, entreguei antes do prazo e propus — e implementei — um log de acessos por card com Supabase, que mostrou quais empresas mais atraíram o público nos três dias do Startup Summit 2024. Em 2025 ganhou a versão MPE e segue sendo usada em eventos.",
-      en: "An interactive catalog of Sebrae-curated startups, built to be explored on big screens and phones during events. I was the only front-end developer, shipped ahead of schedule, and proposed — and built — per-card access logging with Supabase, showing which companies drew the most attention across the three days of Startup Summit 2024. In 2025 it gained a small-business (MPE) edition and is still used at events.",
+      pt: "Catálogo interativo de startups curadas pelo Sebrae, feito para ser explorado em telões e celulares durante eventos. Fui o único dev front-end, entreguei antes do prazo e propus e implementei um log de acessos por card com Supabase, que mostrou quais empresas mais atraíram o público nos três dias do Startup Summit 2024. Em 2025 ganhou a versão MPE e segue sendo usada em eventos.",
+      en: "An interactive catalog of Sebrae-curated startups, built to be explored on big screens and phones during events. I was the only front-end developer, shipped ahead of schedule, and proposed and built per-card access logging with Supabase, showing which companies drew the most attention across the three days of Startup Summit 2024. In 2025 it gained a small-business (MPE) edition and is still used at events.",
     },
     highlights: {
       pt: [
         "Único dev front-end, entrega antes do prazo de 1 mês.",
-        "Analytics por card com Supabase — ideia minha, adotada pelo cliente.",
+        "Analytics por card com Supabase: ideia minha, adotada pelo cliente.",
         "1K+ acessos simultâneos no Startup Summit 2024.",
         "Versão MPE lançada em 2025.",
       ],
       en: [
         "Sole front-end developer, delivered ahead of the 1-month deadline.",
-        "Per-card analytics with Supabase — my idea, adopted by the client.",
+        "Per-card analytics with Supabase: my idea, adopted by the client.",
         "1K+ concurrent visitors at Startup Summit 2024.",
         "Small-business (MPE) edition launched in 2025.",
       ],
@@ -544,7 +544,7 @@ export const projects: Project[] = [
       ],
       en: [
         "Authentication and split between public and private dashboards.",
-        "Indicators fed by Google Sheets — no deploy needed to update.",
+        "Indicators fed by Google Sheets, no deploy needed to update.",
         "Immersive dashboard viewer and automatic pagination.",
         "From zero to delivery in 4 weeks.",
       ],
@@ -572,8 +572,8 @@ export const projects: Project[] = [
       en: "Sindipi's legislation, agreements, partnerships and journal in one place.",
     },
     summary: {
-      pt: "Unifiquei os sistemas do Sindipi em uma plataforma consumindo a API do time de dados — legislação, convenções coletivas, convênios e diário em um só lugar, entregue em 3 semanas. Em 2024 virou também o Observatório Sindipi, um recorte enxuto só com os painéis públicos mais relevantes.",
-      en: "I unified Sindipi's systems into one platform on top of the data team's API — legislation, collective agreements, partnerships and journal in a single place, shipped in 3 weeks. In 2024 it also spawned the Sindipi Observatory, a lean cut with only the most relevant public dashboards.",
+      pt: "Unifiquei os sistemas do Sindipi em uma plataforma consumindo a API do time de dados: legislação, convenções coletivas, convênios e diário em um só lugar, entregue em 3 semanas. Em 2024 virou também o Observatório Sindipi, um recorte enxuto só com os painéis públicos mais relevantes.",
+      en: "I unified Sindipi's systems into one platform on top of the data team's API: legislation, collective agreements, partnerships and journal in a single place, shipped in 3 weeks. In 2024 it also spawned the Sindipi Observatory, a lean cut with only the most relevant public dashboards.",
     },
     highlights: {
       pt: [
@@ -613,8 +613,8 @@ export const projects: Project[] = [
       en: "An animated web presentation of Sebrae SC's strategic plan.",
     },
     summary: {
-      pt: "Experiência web criada para acompanhar a apresentação do planejamento do Sebrae SC e concorrer a prêmios. Hero e cards totalmente animados com Framer Motion, fiéis ao Figma, e uma galeria com scroll customizado — entregue em 3 semanas.",
-      en: "A web experience built to accompany Sebrae SC's strategic plan presentation and compete for awards. Fully animated hero and cards with Framer Motion, faithful to the Figma, plus a gallery with custom scrolling — shipped in 3 weeks.",
+      pt: "Experiência web criada para acompanhar a apresentação do planejamento do Sebrae SC e concorrer a prêmios. Hero e cards totalmente animados com Framer Motion, fiéis ao Figma, e uma galeria com scroll customizado. Entregue em 3 semanas.",
+      en: "A web experience built to accompany Sebrae SC's strategic plan presentation and compete for awards. Fully animated hero and cards with Framer Motion, faithful to the Figma, plus a gallery with custom scrolling. Shipped in 3 weeks.",
     },
     highlights: {
       pt: [
@@ -760,8 +760,8 @@ export const projects: Project[] = [
     role: "Front-end Developer",
     accent: "violet",
     tagline: {
-      pt: "Landing page para captar projetos freelance — do zero ao ar em 3 semanas.",
-      en: "A landing page to land freelance projects — from zero to live in 3 weeks.",
+      pt: "Landing page para captar projetos freelance, do zero ao ar em 3 semanas.",
+      en: "A landing page to land freelance projects, from zero to live in 3 weeks.",
     },
     summary: {
       pt: "Site feito em dupla para captar projetos freelance: serviços, processo de criação e planos com formulário de orçamento. Construído direto no código, sem Figma, em 3 semanas.",

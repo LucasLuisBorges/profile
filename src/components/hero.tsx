@@ -48,7 +48,7 @@ export function Hero() {
           </motion.p>
 
           <h1 className="relative mt-6 font-display text-[clamp(4.2rem,14vw,10.5rem)] leading-[0.82] font-extrabold tracking-[-0.04em]">
-            <span className="sr-only">Lucas Borges — Senior AI Engineer</span>
+            <span className="sr-only">Lucas Borges · Senior AI Engineer</span>
             <span aria-hidden className="block">
               {"Lucas".split("").map((c, i) => (
                 <span key={i} className="inline-block overflow-hidden align-bottom">

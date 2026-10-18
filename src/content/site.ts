@@ -101,7 +101,7 @@ export const skills: { title: L; items: string[]; accent: Accent }[] = [
   },
 ];
 
-export const impact: { label: L; how: L; before: number; after: number; beforeText: string; afterText: string; delta: string; accent: Accent }[] = [
+export const impact: { label: L; how: L; before: number; after: number; beforeText: string; afterText: string | L; delta: string; accent: Accent }[] = [
   {
     label: { pt: "Resposta dos dashboards analíticos", en: "Analytics dashboard response" },
     how: { pt: "Queries PostgreSQL otimizadas + cache Redis nas views de alto tráfego", en: "Tuned PostgreSQL queries + Redis caching on high-traffic views" },
@@ -120,7 +120,7 @@ export const impact: { label: L; how: L; before: number; after: number; beforeTe
   {
     label: { pt: "Releases por semana", en: "Releases per week" },
     how: { pt: "Consequência direta do pipeline mais rápido", en: "A direct result of the faster pipeline" },
-    before: 1, after: 4, beforeText: "1", afterText: "3–4", delta: "4×", accent: "orange",
+    before: 1, after: 4, beforeText: "1", afterText: { pt: "3 a 4", en: "3 to 4" }, delta: "4×", accent: "orange",
   },
 ];
 
@@ -128,16 +128,11 @@ export const impact: { label: L; how: L; before: number; after: number; beforeTe
 export const wins: { value: string; label: L; context: string; accent: Accent }[] = [
   { value: "47", label: { pt: "ferramentas MCP para Claude e ChatGPT", en: "MCP tools for Claude and ChatGPT" }, context: "Elencar", accent: "cyan" },
   { value: "1146", label: { pt: "testes unitários na última validação", en: "unit tests in the latest run" }, context: "Elencar", accent: "lime" },
-  { value: "51", label: { pt: "agentes de IA na auditoria pré-lançamento", en: "AI agents in the pre-launch audit" }, context: "Patiê", accent: "orange" },
-  { value: "80", label: { pt: "modelos de dados e 103 migrations", en: "data models and 103 migrations" }, context: "Patiê", accent: "pink" },
-  { value: "103", label: { pt: "lojas demo na Grande Florianópolis", en: "demo stores in Greater Florianópolis" }, context: "Patiê", accent: "yellow" },
-  { value: "~75%", label: { pt: "dos commits da V2", en: "of V2 commits" }, context: "Aura", accent: "lime" },
-  { value: "23", label: { pt: "testes de integração do runner Docker", en: "Docker runner integration tests" }, context: "Aura", accent: "cyan" },
-  { value: "5", label: { pt: "falhas graves pegas antes do release", en: "critical issues caught pre-release" }, context: "Aura", accent: "pink" },
+  { value: "~75%", label: { pt: "dos commits da V2", en: "of V2 commits" }, context: "Aura", accent: "pink" },
+  { value: "5", label: { pt: "falhas graves pegas antes do release", en: "critical issues caught pre-release" }, context: "Aura", accent: "orange" },
   { value: "3", label: { pt: "provedores Git integrados", en: "Git providers integrated" }, context: "GitHub · GitLab · Azure DevOps", accent: "violet" },
-  { value: "6", label: { pt: "papéis no RBAC multi-tenant", en: "roles in the multi-tenant RBAC" }, context: "AI Hub", accent: "violet" },
-  { value: "20K+", label: { pt: "startups processadas via BigQuery", en: "startups processed via BigQuery" }, context: "Sebrae", accent: "cyan" },
-  { value: "10K+", label: { pt: "acessos simultâneos no lançamento", en: "concurrent visitors at launch" }, context: "Startup Summit", accent: "yellow" },
+  { value: "20K+", label: { pt: "startups processadas via BigQuery", en: "startups processed via BigQuery" }, context: "Sebrae", accent: "yellow" },
+  { value: "10K+", label: { pt: "acessos simultâneos no lançamento", en: "concurrent visitors at launch" }, context: "Startup Summit", accent: "cyan" },
   { value: "200+", label: { pt: "usuários simultâneos sem degradar", en: "concurrent users, no degradation" }, context: "TDBUSINESS", accent: "pink" },
   { value: "0", label: { pt: "vazamentos de dados entre tenants", en: "cross-tenant data leaks" }, context: "TDBUSINESS", accent: "lime" },
   { value: "3", label: { pt: "devs júnior mentorados", en: "junior devs mentored" }, context: "TDBUSINESS", accent: "orange" },
@@ -219,22 +214,22 @@ export const journey: Job[] = [
     start: "2022-09",
     end: "2025-12",
     body: {
-      pt: "Plataformas SaaS enterprise multi-tenant — CRM, analytics, chatbot e automações — para 200+ usuários.",
-      en: "Multi-tenant enterprise SaaS — CRM, analytics, chatbot and automations — for 200+ users.",
+      pt: "Plataformas SaaS enterprise multi-tenant (CRM, analytics, chatbot e automações) para 200+ usuários.",
+      en: "Multi-tenant enterprise SaaS (CRM, analytics, chatbot and automations) for 200+ users.",
     },
     points: {
       pt: [
         "APIs e microsserviços em Node.js integrando OpenAI, Power BI, WhatsApp Business e OAuth2.",
         "Dashboards de 3,2s para 1,2s com tuning de PostgreSQL e cache Redis.",
         "Provisionamento de ambientes de 4h para 3min com GitHub API, Neon e Vercel API.",
-        "CI/CD de 45 para 8 min e de 1 para 3–4 releases por semana.",
+        "CI/CD de 45 para 8 min e de 1 para 3 a 4 releases por semana.",
         "Mentoria de 3 devs júnior, code review e padrões de engenharia.",
       ],
       en: [
         "Node.js APIs and microservices integrating OpenAI, Power BI, WhatsApp Business and OAuth2.",
         "Dashboards from 3.2s to 1.2s with PostgreSQL tuning and Redis caching.",
         "Environment provisioning from 4h to 3min with the GitHub API, Neon and the Vercel API.",
-        "CI/CD from 45 to 8 min and from 1 to 3–4 releases per week.",
+        "CI/CD from 45 to 8 min and from 1 to 3 or 4 releases per week.",
         "Mentored 3 junior devs, ran code reviews and set engineering standards.",
       ],
     },
@@ -291,7 +286,7 @@ const month = (iso: string) => {
   return y * 12 + m - 1;
 };
 
-/** "mai 2026 — hoje · 6 meses", counting both end months like LinkedIn does. */
+/** "mai 2026 → hoje · 6 meses", counting both end months like LinkedIn does. */
 export function period(job: Job, lang: Locale, now = new Date()) {
   const fmt = (iso: string) =>
     new Date(`${iso}-01T12:00:00Z`).toLocaleDateString(lang === "pt" ? "pt-BR" : "en-US", { month: "short", year: "numeric", timeZone: "UTC" }).replace(".", "").replace(" de ", " ");
@@ -300,5 +295,5 @@ export function period(job: Job, lang: Locale, now = new Date()) {
   const [y, m] = [Math.floor(total / 12), total % 12];
   const words = lang === "pt" ? [["ano", "anos"], ["mês", "meses"]] : [["yr", "yrs"], ["mo", "mos"]];
   const parts = [y && `${y} ${words[0][+(y > 1)]}`, m && `${m} ${words[1][+(m > 1)]}`].filter(Boolean).join(" ");
-  return `${fmt(job.start)} — ${job.end ? fmt(job.end) : lang === "pt" ? "hoje" : "now"} · ${parts}`;
+  return `${fmt(job.start)} → ${job.end ? fmt(job.end) : lang === "pt" ? "hoje" : "now"} · ${parts}`;
 }
