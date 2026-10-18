@@ -1,19 +1,22 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { links, ui, type Locale } from "@/content/i18n";
+import { links } from "@/content/site";
 import { ease, trackPointer } from "./motion";
 import { Terminal } from "./terminal";
 
-export function Hero({ lang }: { lang: Locale }) {
-  const t = ui[lang].hero;
+export function Hero() {
+  const t = useTranslations("hero");
+  const lang = useLocale();
+  const roles = t.raw("roles") as string[];
   const [role, setRole] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setRole((r) => (r + 1) % t.roles.length), 2600);
+    const id = setInterval(() => setRole((r) => (r + 1) % roles.length), 2600);
     return () => clearInterval(id);
-  }, [t.roles.length]);
+  }, [roles.length]);
 
   return (
     <section
@@ -41,7 +44,7 @@ export function Hero({ lang }: { lang: Locale }) {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-lime" />
             </span>
-            {t.status} · {t.location}
+            {t("status")} · {t("location")}
           </motion.p>
 
           <h1 className="relative mt-6 font-display text-[clamp(4.2rem,14vw,10.5rem)] leading-[0.82] font-extrabold tracking-[-0.04em]">
@@ -61,9 +64,9 @@ export function Hero({ lang }: { lang: Locale }) {
                 </span>
               ))}
             </span>
-            <span aria-hidden className="block overflow-hidden pb-[0.08em]">
+            <span aria-hidden className="block overflow-hidden">
               <motion.span
-                className="text-gradient inline-block"
+                className="text-gradient inline-block pb-[0.2em]"
                 initial={{ y: "105%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.45, ease }}
@@ -83,7 +86,7 @@ export function Hero({ lang }: { lang: Locale }) {
           </h1>
 
           <p className="mt-8 font-display text-2xl leading-tight font-semibold sm:text-3xl">
-            {t.prefix}
+            {t("prefix")}
             <span className="block min-h-[2.5em] overflow-hidden sm:min-h-[1.25em]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -94,7 +97,7 @@ export function Hero({ lang }: { lang: Locale }) {
                   transition={{ duration: 0.3, ease }}
                   className="block text-lime"
                 >
-                  {t.roles[role]}
+                  {roles[role]}
                 </motion.span>
               </AnimatePresence>
             </span>
@@ -106,7 +109,7 @@ export function Hero({ lang }: { lang: Locale }) {
             transition={{ duration: 1, delay: 0.8 }}
             className="mt-6 max-w-xl text-lg leading-relaxed text-fog"
           >
-            {t.bio}
+            {t("bio")}
           </motion.p>
 
           <motion.div
@@ -119,7 +122,7 @@ export function Hero({ lang }: { lang: Locale }) {
               href="#work"
               className="group inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3.5 font-semibold text-ink transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_var(--color-lime)]"
             >
-              {t.work}
+              {t("work")}
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
@@ -127,7 +130,7 @@ export function Hero({ lang }: { lang: Locale }) {
               target="_blank"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-semibold transition-colors hover:border-pink hover:text-pink"
             >
-              {t.cv} ↓
+              {t("cv")} ↓
             </a>
             <a href={links.github} target="_blank" className="px-3 py-3.5 font-mono text-sm text-fog transition-colors hover:text-white">
               GitHub ↗
@@ -151,7 +154,7 @@ export function Hero({ lang }: { lang: Locale }) {
         href="#work"
         className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[11px] tracking-widest text-fog uppercase md:flex"
       >
-        {t.scroll}
+        {t("scroll")}
         <motion.span animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity }} className="text-lime">
           ↓
         </motion.span>

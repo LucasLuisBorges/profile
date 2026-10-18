@@ -1,32 +1,33 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Flow } from "@/components/flow";
 import { Reveal } from "@/components/motion";
 import { Shot } from "@/components/work";
-import { accents, tr, ui, type Locale } from "@/content/i18n";
+import { accents, tr, type Locale } from "@/content/site";
 import { projects } from "@/content/projects";
+import { Link } from "@/i18n/navigation";
 
-type Props = { params: Promise<{ lang: Locale; slug: string }> };
+type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
-export const dynamicParams = false;
 export const generateStaticParams = () => projects.map((p) => ({ slug: p.slug }));
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { lang, slug } = await params;
+  const { locale: lang, slug } = await params;
   const p = projects.find((p) => p.slug === slug);
   if (!p) return {};
   return { title: tr(p.title, lang), description: p.tagline[lang] };
 }
 
 export default async function ProjectPage({ params }: Props) {
-  const { lang, slug } = await params;
+  const { locale: lang, slug } = await params;
+  setRequestLocale(lang);
   const index = projects.findIndex((p) => p.slug === slug);
   if (index < 0) notFound();
 
   const p = projects[index];
   const next = projects[(index + 1) % projects.length];
-  const t = ui[lang].project;
+  const t = await getTranslations("project");
   const color = accents[p.accent];
   const title = tr(p.title, lang);
 
@@ -39,8 +40,8 @@ export default async function ProjectPage({ params }: Props) {
         </div>
 
         <div className="mx-auto max-w-6xl px-4">
-          <Link href={`/${lang}/#work`} className="font-mono text-sm text-fog transition-colors hover:text-[var(--accent)]">
-            ← {t.back}
+          <Link href="/#work" className="font-mono text-sm text-fog transition-colors hover:text-[var(--accent)]">
+            ← {t("back")}
           </Link>
           <Reveal>
             <p className="mt-10 font-mono text-sm tracking-widest text-[var(--accent)] uppercase">
@@ -55,15 +56,15 @@ export default async function ProjectPage({ params }: Props) {
           <Reveal delay={0.15}>
             <dl className="mt-12 grid gap-6 border-y border-white/10 py-8 sm:grid-cols-[1fr_1fr_2fr]">
               <div>
-                <dt className="font-mono text-xs text-fog uppercase">{t.role}</dt>
+                <dt className="font-mono text-xs text-fog uppercase">{t("role")}</dt>
                 <dd className="mt-2 font-medium">{tr(p.role, lang)}</dd>
               </div>
               <div>
-                <dt className="font-mono text-xs text-fog uppercase">{t.year}</dt>
+                <dt className="font-mono text-xs text-fog uppercase">{t("year")}</dt>
                 <dd className="mt-2 font-medium">{p.year}</dd>
               </div>
               <div>
-                <dt className="font-mono text-xs text-fog uppercase">{t.stack}</dt>
+                <dt className="font-mono text-xs text-fog uppercase">{t("stack")}</dt>
                 <dd className="mt-2 flex flex-wrap gap-2">
                   {p.stack.map((s) => (
                     <span key={s} className="rounded-full border border-white/15 px-3 py-1 font-mono text-xs">
@@ -82,7 +83,7 @@ export default async function ProjectPage({ params }: Props) {
                 target="_blank"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3.5 font-semibold text-ink transition-transform hover:-translate-y-0.5"
               >
-                {t.live} ↗
+                {t("live")} ↗
               </a>
             </Reveal>
           )}
@@ -93,8 +94,8 @@ export default async function ProjectPage({ params }: Props) {
         <section className="mx-auto max-w-6xl px-4 pb-8">
           <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 sm:grid-cols-3">
             {p.metrics.map((m, i) => (
-              <Reveal key={m.value} delay={i * 0.08} className="bg-ink p-7">
-                <p className="font-display text-5xl font-extrabold tracking-tight text-[var(--accent)]">{m.value}</p>
+              <Reveal key={i} delay={i * 0.08} className="bg-ink p-7">
+                <p className="font-display text-5xl font-extrabold tracking-tight text-[var(--accent)]">{tr(m.value, lang)}</p>
                 <p className="mt-2 text-sm text-fog">{m.label[lang]}</p>
               </Reveal>
             ))}
@@ -107,18 +108,25 @@ export default async function ProjectPage({ params }: Props) {
           <p className="text-xl leading-relaxed text-white/90 sm:text-2xl">{p.summary[lang]}</p>
           {p.team && (
             <p className="mt-8 font-mono text-sm text-fog">
-              {t.with}{" "}
-              {p.team.map((m) => (
-                <a key={m.github} href={m.github} target="_blank" className="text-white underline decoration-[var(--accent)] underline-offset-4">
-                  {m.name}
-                </a>
+              {t("with")}{" "}
+              {p.team.map((m, i) => (
+                <span key={m.name}>
+                  {i > 0 && ", "}
+                  {m.github ? (
+                    <a href={m.github} target="_blank" className="text-white underline decoration-[var(--accent)] underline-offset-4">
+                      {m.name}
+                    </a>
+                  ) : (
+                    <span className="text-white">{m.name}</span>
+                  )}
+                </span>
               ))}
             </p>
           )}
         </Reveal>
 
         <Reveal delay={0.1}>
-          <h2 className="font-mono text-sm tracking-widest text-[var(--accent)] uppercase">{t.highlights}</h2>
+          <h2 className="font-mono text-sm tracking-widest text-[var(--accent)] uppercase">{t("highlights")}</h2>
           <ol className="mt-6 space-y-4">
             {p.highlights[lang].map((h, i) => (
               <li key={h} className="flex gap-4 border-b border-white/10 pb-4">
@@ -133,8 +141,8 @@ export default async function ProjectPage({ params }: Props) {
       {p.flow && (
         <section className="mx-auto grid max-w-6xl gap-10 px-4 py-16 lg:grid-cols-2 lg:items-center">
           <Reveal>
-            <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">{t.flow}</h2>
-            {!p.images && <p className="mt-5 max-w-md text-lg text-fog">{t.confidential}</p>}
+            <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">{t("flow")}</h2>
+            {!p.images && <p className="mt-5 max-w-md text-lg text-fog">{t("confidential")}</p>}
           </Reveal>
           <div className="rounded-3xl border border-white/10 bg-ink-2 p-6 sm:p-10">
             <Flow steps={p.flow[lang]} color={color} />
@@ -145,7 +153,7 @@ export default async function ProjectPage({ params }: Props) {
       {p.images && (
         <section className="mx-auto max-w-6xl px-4 py-16">
           <Reveal>
-            <h2 className="mb-10 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">{t.gallery}</h2>
+            <h2 className="mb-10 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">{t("gallery")}</h2>
           </Reveal>
           <div className="grid gap-8 md:grid-cols-2">
             {p.images.map((src, i) => (
@@ -161,11 +169,11 @@ export default async function ProjectPage({ params }: Props) {
 
       <section className="mx-auto max-w-6xl px-4 py-20">
         <Link
-          href={`/${lang}/projects/${next.slug}/`}
+          href={`/projects/${next.slug}`}
           className="group block rounded-[2rem] border border-white/10 bg-ink-2 p-8 transition-colors hover:border-[var(--next)] sm:p-12"
           style={{ ["--next" as string]: accents[next.accent] }}
         >
-          <p className="font-mono text-sm text-fog uppercase">{t.next}</p>
+          <p className="font-mono text-sm text-fog uppercase">{t("next")}</p>
           <p className="mt-3 flex items-center justify-between gap-6 font-display text-4xl font-extrabold tracking-tight transition-colors group-hover:text-[var(--next)] sm:text-6xl">
             {tr(next.title, lang)}
             <span className="transition-transform duration-500 group-hover:translate-x-2 group-hover:-rotate-45">→</span>
