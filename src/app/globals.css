@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #07070c;
+  --color-ink-2: #0e0e17;
+  --color-ink-3: #171723;
+  --color-fog: #a3a3bb;
+  --color-lime: #c8ff2e;
+  --color-pink: #ff3ea5;
+  --color-violet: #8b5cff;
+  --color-cyan: #2ee6ff;
+  --color-orange: #ff7a2e;
+  --color-yellow: #ffd23f;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-rev: marquee 38s linear infinite reverse;
+  --animate-drift-a: drift-a 18s ease-in-out infinite alternate;
+  --animate-drift-b: drift-b 22s ease-in-out infinite alternate;
+  --animate-pan: pan 8s linear infinite;
+  --animate-flow: flow 1.6s linear infinite;
+  --animate-blink: blink 1s steps(1) infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes drift-a {
+    to { transform: translate(18vw, 12vh) scale(1.25); }
+  }
+  @keyframes drift-b {
+    to { transform: translate(-16vw, -10vh) scale(0.85); }
+  }
+  @keyframes pan {
+    to { background-position: 200% center; }
+  }
+  @keyframes flow {
+    to { background-position: 40px 0; }
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+}
+
+@theme inline {
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-ink);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: #f4f4f8;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Rainbow text used for the name and key words. */
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-lime), var(--color-cyan), var(--color-violet), var(--color-pink), var(--color-orange), var(--color-lime));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-pan);
+}
+
+/* Faint grid that fades out toward the edges. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Mouse-follow glow; --x/--y are set from JS. */
+.spotlight {
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), color-mix(in oklab, var(--accent, #fff) 14%, transparent), transparent 40%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
