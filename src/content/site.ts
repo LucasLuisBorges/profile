@@ -81,7 +81,7 @@ export const skills: { title: L; items: string[]; accent: Accent }[] = [
   },
   {
     title: { pt: "Backend", en: "Backend" },
-    items: ["Node.js", "Bun", "Hono", "oRPC", "NestJS", "Fastify", "tRPC", "Rust (BFF)", ".NET", "Python", "Drizzle", "Prisma", "Better Auth", "OAuth2 / RBAC", "Mercado Pago / Pix", "Stripe"],
+    items: ["Node.js", "Bun", "Hono", "oRPC", "NestJS", "Fastify", "tRPC", "Rust (BFF)", "Python", "Drizzle", "Prisma", "Better Auth", "OAuth2 / RBAC", "Mercado Pago / Pix", "Stripe"],
     accent: "violet",
   },
   {
@@ -91,12 +91,12 @@ export const skills: { title: L; items: string[]; accent: Accent }[] = [
   },
   {
     title: { pt: "Arquitetura", en: "Architecture" },
-    items: ["Multi-tenant", "Microsserviços", "Event-driven", "Observabilidade", "Alta disponibilidade", "DDD", "Clean Architecture"],
+    items: ["Multi-tenant", "Microservices", "Observability", "Clean Architecture"],
     accent: "yellow",
   },
   {
     title: { pt: "Qualidade", en: "Quality" },
-    items: ["Vitest", "Bun test", "Jest", "Playwright", "Cypress", "Mutation testing", "TDD", "Code review"],
+    items: ["Vitest", "Bun test", "Jest", "Playwright", "Code review"],
     accent: "orange",
   },
 ];
@@ -133,9 +133,9 @@ export const wins: { value: string; label: L; context: string; accent: Accent }[
   { value: "3", label: { pt: "provedores Git integrados", en: "Git providers integrated" }, context: "GitHub · GitLab · Azure DevOps", accent: "violet" },
   { value: "20K+", label: { pt: "startups processadas via BigQuery", en: "startups processed via BigQuery" }, context: "Sebrae", accent: "yellow" },
   { value: "10K+", label: { pt: "acessos simultâneos no lançamento", en: "concurrent visitors at launch" }, context: "Startup Summit", accent: "cyan" },
-  { value: "200+", label: { pt: "usuários simultâneos sem degradar", en: "concurrent users, no degradation" }, context: "TDBUSINESS", accent: "pink" },
-  { value: "0", label: { pt: "vazamentos de dados entre tenants", en: "cross-tenant data leaks" }, context: "TDBUSINESS", accent: "lime" },
-  { value: "3", label: { pt: "devs júnior mentorados", en: "junior devs mentored" }, context: "TDBUSINESS", accent: "orange" },
+  { value: "200+", label: { pt: "usuários simultâneos sem degradar", en: "concurrent users, no degradation" }, context: "TD Business", accent: "pink" },
+  { value: "0", label: { pt: "vazamentos de dados entre tenants", en: "cross-tenant data leaks" }, context: "TD Business", accent: "lime" },
+  { value: "3", label: { pt: "devs júnior mentorados", en: "junior devs mentored" }, context: "TD Business", accent: "orange" },
 ];
 
 export type Job = {
@@ -209,7 +209,7 @@ export const journey: Job[] = [
   },
   {
     role: "Full Stack Developer",
-    company: "TDBUSINESS",
+    company: "TD Business",
     type: { pt: "Tempo integral · Remoto · Florianópolis", en: "Full-time · Remote · Florianópolis" },
     start: "2022-09",
     end: "2025-12",

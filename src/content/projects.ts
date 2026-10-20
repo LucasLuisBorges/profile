@@ -383,7 +383,7 @@ export const projects: Project[] = [
   {
     slug: "saas-multi-tenant",
     title: { pt: "SaaS multi-tenant & provisionamento", en: "Multi-tenant SaaS & provisioning" },
-    client: "TDBUSINESS",
+    client: "TD Business",
     year: "2022 → 2025",
     role: "Full Stack Developer",
     accent: "lime",
@@ -392,8 +392,8 @@ export const projects: Project[] = [
       en: "From 4 hours to 3 minutes: a new SaaS environment in one click.",
     },
     summary: {
-      pt: "Na TDBUSINESS, construí a base das plataformas SaaS da empresa: CRM multi-tenant para 200+ usuários, com isolamento de dados por tenant, 5 níveis de permissão, soft delete e audit log. Depois automatizei o provisionamento de cada cliente novo: repositório no GitHub, banco Neon PostgreSQL e deploy na Vercel, tudo orquestrado por Server Actions do Next.js.",
-      en: "At TDBUSINESS I built the foundation of the company's SaaS platforms: a multi-tenant CRM for 200+ users with per-tenant data isolation, 5 permission levels, soft deletes and audit logging. Then I automated provisioning for every new client: GitHub repository, Neon PostgreSQL database and Vercel deploy, all orchestrated by Next.js Server Actions.",
+      pt: "Na TD Business, construí a base das plataformas SaaS da empresa: CRM multi-tenant para 200+ usuários, com isolamento de dados por tenant, 5 níveis de permissão, soft delete e audit log. Depois automatizei o provisionamento de cada cliente novo: repositório no GitHub, banco Neon PostgreSQL e deploy na Vercel, tudo orquestrado por Server Actions do Next.js.",
+      en: "At TD Business I built the foundation of the company's SaaS platforms: a multi-tenant CRM for 200+ users with per-tenant data isolation, 5 permission levels, soft deletes and audit logging. Then I automated provisioning for every new client: GitHub repository, Neon PostgreSQL database and Vercel deploy, all orchestrated by Next.js Server Actions.",
     },
     highlights: {
       pt: [
@@ -669,7 +669,7 @@ export const projects: Project[] = [
     slug: "td-business",
     archived: true,
     title: "TD Business",
-    client: "TDBUSINESS",
+    client: "TD Business",
     year: "2023",
     role: "Front-end Developer",
     accent: "orange",
